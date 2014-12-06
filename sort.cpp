@@ -11,6 +11,12 @@ void FillOrdered(int arr[], int size);
 void FillReverseOrder(int arr[], int size); 	
 
 template <class T>
+void mergeSort(T arr[], int size);
+template <class T>
+void mergeSort(T arr[], T tmp[], int left, int right);
+template <class T>
+void merge(T arr[], T tmp[], int left, int right, int end);
+template <class T>
 void bubbleSort(T a[], int size);
 template <class T>
 void selectionSort(T arr[], int size);
@@ -41,17 +47,18 @@ int main(){
 		case 3: FillRandom(arr, size); break;
 	}
 	
-	while(choice != 4){
-		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Exit\t";
+	while(choice != 5){
+		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\t5: Exit\t";
 		do{
 			cin>>choice;
-		}while(choice<1 || choice >4);
+		}while(choice<1 || choice >5);
 		cout<<endl;
 		switch(choice){
 			case 1: printArray(arr,size); break;
 			case 2: bubbleSort(arr,size); break;
 			case 3: selectionSort(arr,size); break;
-			case 4: break;
+			case 4: mergeSort(arr,size); break;
+			case 5: break;
 		}
 	} 
 	
@@ -122,6 +129,50 @@ void selectionSort(T arr[], int size){
 	}
 }
 
+
+template <class T>
+void mergeSort(T arr[], int size){
+	T* tmp = new T[size];
+	mergeSort(arr, tmp, 0, size-1);
+	delete tmp;
+}
+
+
+template <class T>
+void mergeSort(T arr[], T tmp[], int left, int right){
+	if(left < right){
+		int middle = (left + right)/2;
+		mergeSort(arr,tmp,left,middle);
+		mergeSort(arr,tmp,middle+1,right);
+		merge(arr, tmp, left, middle+1,right);
+	}
+}
+
+template <class T>
+void merge(T arr[], T tmp[], int left, int right, int end){
+	int leftEnd = right-1;
+	int curr = left;
+	int size = end - left +1;
+	
+	
+	while(left <= leftEnd && right <= end){
+		if(arr[left] <= arr[right])
+			tmp[curr++] = arr[left++];      //get the smallest item of the two sorted arrays
+		else
+			tmp[curr++] = arr[right++];
+	}
+	
+	while(left <= leftEnd)
+		tmp[curr++] = arr[left++];
+	
+	while(right <= end)
+		tmp[curr++] = arr[right++];
+	
+	for(int i = 0; i < size; i++, --end){
+		arr[end] = tmp[end];
+	}
+		
+}
 
 
 
