@@ -128,15 +128,16 @@ void selectionSort(T arr[], int size, int & assignments, int & comparisons){
 	comparisons = 1;  //initial loop gaurd.. minimum of one comparisons
 	assignments = 0;
 	
-	for(int i = 0; i < size-1; i++){
-		minIndex = i;
-		min = arr[i];
-		for(int j = i+1; j < size; j++)
-			if(arr[j] < min){
-				min = arr[j];
-				minIndex = j;
+	for(int i = 0; i < size-1; i++){ 	comparisons++;
+		minIndex = i;					assignments++;
+		min = arr[i];					assignments++;
+		for(int j = i+1; j < size; j++){ comparisons++;
+			if(arr[j] < min){			comparisons++;
+				min = arr[j];			assignments++;
+				minIndex = j;			assignments++;
 			}
-		swap(arr[i], arr[minIndex]);
+		}
+		swap(arr[i], arr[minIndex]);   assignements+=3;
 	}
 }
 
