@@ -11,16 +11,16 @@ void FillOrdered(int arr[], int size);
 void FillReverseOrder(int arr[], int size); 	
 
 template <class T>
-void mergeSort(T arr[], int size);
+void mergeSort(T arr[], int size, int & assignments, int & comparisons);
 template <class T>
-void mergeSort(T arr[], T tmp[], int left, int right);
+void mergeSort(T arr[], T tmp[], int left, int right, int & assignments, int & comparisons);
 template <class T>
-void merge(T arr[], T tmp[], int left, int right, int end);
+void merge(T arr[], T tmp[], int left, int right, int end, int & assignments, int & comparisons);
 template <class T>
-void bubbleSort(T a[], int size);
+void bubbleSort(T a[], int size, int & assignments, int & comparisons);
 template <class T>
-void selectionSort(T arr[], int size);
-void printMatrixBubble();
+void selectionSort(T arr[], int size, int & assignments, int & comparisons);
+
 
 int main(){
 
@@ -28,6 +28,8 @@ int main(){
 	int *arr;
 	int order;
 	int choice = 0;
+	int assignments = 0;
+	int comparisons = 0;
 	
 	cout<<"What size would you like you list to be?";
 	cin>>size;
@@ -55,9 +57,10 @@ int main(){
 		cout<<endl;
 		switch(choice){
 			case 1: printArray(arr,size); break;
-			case 2: bubbleSort(arr,size); break;
-			case 3: selectionSort(arr,size); break;
-			case 4: mergeSort(arr,size); break;
+			case 2: bubbleSort(arr,size,assignments,comparisons); break;
+			case 3: selectionSort(arr,size,assignments,comparisons); break;
+			case 4: mergeSort(arr,size,assignments,comparisons); break;
+			case 5: cout<<"Quicksort is not completed"; break;
 			case 6: FillOrdered(arr,size); break;
 			case 7: FillReverseOrder(arr,size); break;
 			case 8: FillRandom(arr, size); break;
@@ -90,21 +93,23 @@ void FillReverseOrder(int arr[], int size){
 
 
 template <class T>
-void bubbleSort(T a[],int size){
+void bubbleSort(T a[],int size, int & assignments, int & comparisons){
     bool cleanPass;
     int i = size-1;
     int j;
-	int assignments = 0;
+	assignments = 0;
+	comparisons = 2; 	//first loop gaurd
     
-    while(i > 0 && !cleanPass){
-        cleanPass = true; assignments++;
-        for(j = 0; j < i; j++){
-            if(a[j] > a[j+1]){
-                swap(a[j], a[j+1]); assignments += 3;   //takes 3 assignments to swap
-              	cleanPass = false; assignments++;
+    while(i > 0 && !cleanPass){  
+        cleanPass = true; 				assignments++;
+        for(j = 0; j < i; j++){ 		comparisons++;
+            if(a[j] > a[j+1]){ 			comparisons++;
+                swap(a[j], a[j+1]); 	assignments+= 3;   //takes 3 assignments to swap
+              	cleanPass = false; 		assignments++;
             }
         }
-        i = i-1; assignments++;        
+        i = i-1; 						assignments++;
+										comparisons += 2; 
     }
 
 }
@@ -117,9 +122,12 @@ void printArray(T arr[], int size){
 }
 
 template <class T>
-void selectionSort(T arr[], int size){
+void selectionSort(T arr[], int size, int & assignments, int & comparisons){
 	T min;
 	int minIndex;
+	comparisons = 1;  //initial loop gaurd.. minimum of one comparisons
+	assignments = 0;
+	
 	for(int i = 0; i < size-1; i++){
 		minIndex = i;
 		min = arr[i];
@@ -134,25 +142,25 @@ void selectionSort(T arr[], int size){
 
 
 template <class T>
-void mergeSort(T arr[], int size){
+void mergeSort(T arr[], int size, int & assignments, int & comparisons){
 	T* tmp = new T[size];
-	mergeSort(arr, tmp, 0, size-1);
+	mergeSort(arr, tmp, 0, size-1,assignments,comparisons);
 	delete tmp;
 }
 
 
 template <class T>
-void mergeSort(T arr[], T tmp[], int left, int right){
+void mergeSort(T arr[], T tmp[], int left, int right, int & assignments, int & comparisons){
 	if(left < right){
-		int middle = (left + right)/2;
-		mergeSort(arr,tmp,left,middle);
-		mergeSort(arr,tmp,middle+1,right);
-		merge(arr, tmp, left, middle+1,right);
+		int middle = (left + right,assignments,comparisons)/2;
+		mergeSort(arr,tmp,left,middle,assignments,comparisons);
+		mergeSort(arr,tmp,middle+1,right,assignments,comparisons);
+		merge(arr, tmp, left, middle+1,right,assignments,comparisons);
 	}
 }
 
 template <class T>
-void merge(T arr[], T tmp[], int left, int right, int end){
+void merge(T arr[], T tmp[], int left, int right, int end, int & assignments, int & comparisons){
 	int leftEnd = right-1;
 	int curr = left;
 	int size = end - left +1;
