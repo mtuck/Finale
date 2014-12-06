@@ -47,18 +47,21 @@ int main(){
 		case 3: FillRandom(arr, size); break;
 	}
 	
-	while(choice != 5){
-		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\t5: Exit\t";
+	while(choice != 9){
+		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\n5: Quick Sort\t6: Fill Ordered\t7: FillReverse\t8: Fill Random\t9: Exit\t";
 		do{
 			cin>>choice;
-		}while(choice<1 || choice >5);
+		}while(choice<1 || choice >9);
 		cout<<endl;
 		switch(choice){
 			case 1: printArray(arr,size); break;
 			case 2: bubbleSort(arr,size); break;
 			case 3: selectionSort(arr,size); break;
 			case 4: mergeSort(arr,size); break;
-			case 5: break;
+			case 6: FillOrdered(arr,size); break;
+			case 7: FillReverseOrder(arr,size); break;
+			case 8: FillRandom(arr, size); break;
+			case 9: break;
 		}
 	} 
 	
@@ -70,7 +73,7 @@ int main(){
 
 void FillRandom(int arr[], int size){
 	for(int i = 0; i<size; i++)
-		arr[i] = rand() % 10000;
+		arr[i] = rand() % 999;
 }
 
 void FillOrdered(int arr[], int size){
