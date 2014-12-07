@@ -2,6 +2,7 @@
 #include <stdlib.h> 
 using namespace std;
 
+void printTables();
 template <class T>
 void printArray(T arr[], int size); 
 
@@ -10,6 +11,7 @@ void FillRandom(int arr[], int size);
 void FillOrdered(int arr[], int size); 		
 void FillReverseOrder(int arr[], int size); 	
 
+//sort functions bubble and merge came from book
 template <class T>
 void mergeSort(T arr[], int size, int & assignments, int & comparisons);
 template <class T>
@@ -20,7 +22,6 @@ template <class T>
 void bubbleSort(T a[], int size, int & assignments, int & comparisons);
 template <class T>
 void selectionSort(T arr[], int size, int & assignments, int & comparisons);
-
 template <class T>
 void quicksort(T arr[], int size, int & assignments, int & comparisons);
 template <class T>
@@ -37,7 +38,7 @@ int main(){
 	int assignments = 0;
 	int comparisons = 0;
 	
-	cout<<"What size would you like you list to be?";
+	cout<<"What size would you like you array to be?";
 	cin>>size;
 	if(size > 0 && size < 100000)  //change to while loop
 		arr = new int[size];
@@ -55,11 +56,11 @@ int main(){
 		case 3: FillRandom(arr, size); break;
 	}
 	
-	while(choice != 9){
-		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\n5: Quick Sort\t6: Fill Ordered\t7: FillReverse\t8: Fill Random\t9: Exit\t";
+	while(choice != 10){
+		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\n5: Quick Sort\t6: Fill Ordered\t7: FillReverse\t8: Fill Random\t9: Print Tablest10: Exit\t";
 		do{
 			cin>>choice;
-		}while(choice<1 || choice >9);
+		}while(choice<1 || choice >10);
 		cout<<endl;
 		switch(choice){
 			case 1: printArray(arr,size); break;
@@ -70,7 +71,8 @@ int main(){
 			case 6: FillOrdered(arr,size); break;
 			case 7: FillReverseOrder(arr,size); break;
 			case 8: FillRandom(arr, size); break;
-			case 9: break;
+			case 9: printTables(); break;
+			case 10: break;
 		}
 	} 
 	delete [] arr;
@@ -250,9 +252,328 @@ const T & median3(T arr[], int left, int right, int & assignments, int & compari
 	
 	swap(arr[center], arr[right-1]); assignments+=3;
 	return arr[right-1];
+}
 
+
+
+void printTables(){
+	int * a100 = new int[100];
+	int * a1000 = new int[1000];
+	int * a10000 = new int[10000];
+	int assignments = 0;
+	int comparisons = 0;
+	
+	cout<<"\nBubble Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Assignment Statements\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	bubbleSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a100,100);
+	bubbleSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a100,100);
+	bubbleSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	bubbleSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a1000,1000);
+	bubbleSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	bubbleSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	bubbleSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t|";
+	FillOrdered(a10000,10000);
+	bubbleSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	bubbleSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	cout<<"\nBubble Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Comparisons\t\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	bubbleSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a100,100);
+	bubbleSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a100,100);
+	bubbleSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	bubbleSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a1000,1000);
+	bubbleSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	bubbleSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	bubbleSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t|";
+	FillOrdered(a10000,10000);
+	bubbleSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	bubbleSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n\n";
+
+
+	//selection sort
+
+	cout<<"\nSelection Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Assignment Statements\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	selectionSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a100,100);
+	selectionSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a100,100);
+	selectionSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	selectionSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a1000,1000);
+	selectionSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	selectionSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	selectionSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a10000,10000);
+	selectionSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	selectionSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	cout<<"\nSelection Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Comparisons\t\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	selectionSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a100,100);
+	selectionSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a100,100);
+	selectionSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	selectionSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a1000,1000);
+	selectionSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	selectionSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	selectionSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t|";
+	FillOrdered(a10000,10000);
+	selectionSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t|";
+	FillReverseOrder(a10000,10000);
+	selectionSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	//merge sort
+	cout<<"\nMerge Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Assignment Statements\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	mergeSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a100,100);
+	mergeSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a100,100);
+	mergeSort(a100,100,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	mergeSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a1000,1000);
+	mergeSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	mergeSort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	mergeSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a10000,10000);
+	mergeSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	mergeSort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	cout<<"\nMerge Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Comparisons\t\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	mergeSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a100,100);
+	mergeSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a100,100);
+	mergeSort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	mergeSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a1000,1000);
+	mergeSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	mergeSort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	mergeSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a10000,10000);
+	mergeSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	mergeSort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	
+	
+		cout<<"\nQuick Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Assignment Statements\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	quicksort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a100,100);
+	quicksort(a100,100,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a100,100);
+	quicksort(a100,100,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	quicksort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a1000,1000);
+	quicksort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	quicksort(a1000,1000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	quicksort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillOrdered(a10000,10000);
+	quicksort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	quicksort(a10000,10000,assignments,comparisons);
+	cout<<assignments<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	//quicksort
+	
+	
+	cout<<"\nQuick Sort\n------------------------------------------------------------------------\n";
+	cout<<"|Comparisons\t\t|Random\t\t|Ordered\t|Reverse Order";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|100 items\t\t|";
+	FillRandom(a100,100);
+	quicksort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a100,100);
+	quicksort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a100,100);
+	quicksort(a100,100,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|1000 items\t\t|";
+	FillRandom(a1000,1000);
+	quicksort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a1000,1000);
+	quicksort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a1000,1000);
+	quicksort(a1000,1000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	cout<<"|10000 items\t\t|";
+	FillRandom(a10000,10000);
+	quicksort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillOrdered(a10000,10000);
+	quicksort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"\t\t|";
+	FillReverseOrder(a10000,10000);
+	quicksort(a10000,10000,assignments,comparisons);
+	cout<<comparisons<<"";
+	cout<<"\n------------------------------------------------------------------------\n";
+	
+	
+	
 
 }
+
+
 
 
 
