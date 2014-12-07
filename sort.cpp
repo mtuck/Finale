@@ -57,7 +57,7 @@ int main(){
 	}
 	
 	while(choice != 10){
-		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\n5: Quick Sort\t6: Fill Ordered\t7: FillReverse\t8: Fill Random\t9: Print Tablest10: Exit\t";
+		cout<<"\n\n1: Print Array\t2: Bubble Sort\t3: Selection Sort\t4: Merge Sort\n5: Quick Sort\t6: Fill Ordered\t7: FillReverse\t8: Fill Random\t9: Print Tables\t10: Exit\t";
 		do{
 			cin>>choice;
 		}while(choice<1 || choice >10);
